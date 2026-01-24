@@ -11,6 +11,14 @@ function setup() {
 }
 function draw() {
     background(grid);
+    //sky
+    fill(232, 244, 255);
+    noStroke();
+    rect(0, 0, 1000, 800);
+    //hill
+    fill(174, 215, 255);
+    noStroke();
+    ellipse(500, 750, 1500, 400);
     //snowman legs
     fill("#f1f1f1");
     stroke(0);
