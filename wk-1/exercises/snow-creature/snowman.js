@@ -21,4 +21,19 @@ function draw() {
     ellipse(500, 450, 350, 400);
     //head
     ellipse(500, 200, 200);
+    //hat brim
+    stroke(87, 51, 16);
+    strokeWeight(40);
+    line(400, 120, 600, 120);
+    //hat body
+    quad(400, 50, 600, 50, 550, 120, 450, 120);
+    //eyes
+    stroke(0);
+    strokeWeight(50);
+    point(425, 200)
+    point(575, 200)
+    //mouth
+    noFill();
+    strokeWeight(10);
+    arc(500, 200, 80, 80, 0, HALF_PI);
 }
