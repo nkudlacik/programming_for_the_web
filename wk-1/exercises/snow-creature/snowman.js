@@ -1,6 +1,8 @@
 console.log("snowman.js is loaded");
 
 let grid;
+//let stroke1 = prompt("What color should we draw the snowman?", "black");
+//let stroke2 = prompt("What color should the snowman's hat be?", "black");
 
 function setup() {
     createCanvas(1000, 800);
@@ -11,29 +13,35 @@ function draw() {
     background(grid);
     //snowman legs
     fill("#f1f1f1");
-    stroke(34, 95, 199);
-    strokeWeight(20);
-    //left leg
-    ellipse(350, 650, 200);
-    //right leg
-    ellipse(650, 650, 200);
-    //body
-    ellipse(500, 450, 350, 400);
+    stroke(0);
+    strokeWeight(10);
+    //base
+    ellipse(500, 600, 300);
+    //middle
+    ellipse(500, 400, 250);
     //head
-    ellipse(500, 200, 200);
+    ellipse(500, 250, 200);
     //hat brim
-    stroke(87, 51, 16);
-    strokeWeight(40);
-    line(400, 120, 600, 120);
+    stroke(0);
+    strokeWeight(10);
+    line(380, 150, 620, 150);
     //hat body
-    quad(400, 50, 600, 50, 550, 120, 450, 120);
+    quad(450, 50, 550, 50, 575, 150, 425, 150);
     //eyes
     stroke(0);
-    strokeWeight(50);
-    point(425, 200)
-    point(575, 200)
-    //mouth
-    noFill();
+    strokeWeight(30);
+    point(460, 225)
+    point(550, 250)
+    //pipe stem
+    stroke(0);
     strokeWeight(10);
-    arc(500, 200, 80, 80, 0, HALF_PI);
+    line(440, 280, 500, 280);
+    //pipe bowl
+    quad(440, 270, 450, 270, 450, 290, 440, 290);
+    //buttons
+    stroke(0);
+    strokeWeight(30);
+    point(500, 385)
+    point(500, 430)
+    point(500, 475)
 }
