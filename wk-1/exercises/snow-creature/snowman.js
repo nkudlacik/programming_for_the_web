@@ -1,7 +1,12 @@
 console.log("snowman.js is loaded");
 
-let grid = undefined;
+let grid;
+
 function setup() {
     createCanvas(1000, 800);
-    background ("#000");
+    background("#ccc");
+    grid = loadImage("images/100px_grid.png");
+}
+function draw() {
+    background(grid);
 }
