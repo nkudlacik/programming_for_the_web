@@ -26,5 +26,6 @@ let triviaQuestion = questions[randomIndex];
 
 let userResponse = prompt(triviaQuestion.question);
 
+// Alert window with correct answer
 
-//console.log("random question", questions[randomIndex]);
+window.alert("You answered " + userResponse + "." + "The correct answer is " + triviaQuestion.answer + ".");
