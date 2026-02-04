@@ -1,8 +1,7 @@
 function setup() {
-    createCanvas(200,200);
+    createCanvas(200, 200);
     noLoop();
 }
-
 
 // creating function
 function createTile() {
