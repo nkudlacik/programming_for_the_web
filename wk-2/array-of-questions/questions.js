@@ -28,4 +28,4 @@ let userResponse = prompt(triviaQuestion.question);
 
 // Alert window with correct answer
 
-window.alert("You answered " + userResponse + "." + "The correct answer is " + triviaQuestion.answer + ".");
+window.alert("You answered " + userResponse + "." + " The correct answer is " + triviaQuestion.answer + ".");
