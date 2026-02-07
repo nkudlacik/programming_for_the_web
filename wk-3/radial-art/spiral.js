@@ -3,6 +3,7 @@ function setup() {
     createCanvas(600, 600);
     background('#36454f');
     angleMode(DEGREES);
+    window.alert("Click anywhere on your screen to freeze the Spirograph! Refresh the page to start a new design!");
 }
 
 function makeArm(rotateBy) {
