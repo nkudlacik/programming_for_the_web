@@ -1,10 +1,10 @@
 // SPECIFICATIONS
 let rotateBy = 5;
-let colors = ['#ccff00', '#e90097'];
+let colors = ['#ccff00', '#fff', '#e90097', '#00e9b7', '#000'];
 let colorIndex = 0;
 let lastRotation = 0;
 
-//FUNCTIONS
+//FUNCTIONS & SETUP
 function setup() {
     createCanvas(600, 600);
     background('#36454f');
@@ -13,7 +13,6 @@ function setup() {
 }
 
 //DRAWING THE SPIRAL
-
 function makeArm(rotateBy) {
     let alt = Math.round(rotateBy / 360);
     console.log(alt);
@@ -28,8 +27,7 @@ function draw() {
     rotate(rotateBy);
     makeArm(rotateBy);
 
-//COLOR VARIATION
-
+//COLOR VARIATIONS
     let fullRotationCount = Math.floor(rotateBy / 360);
     if (fullRotationCount > lastRotation) {
         colorIndex = (colorIndex + 1) % colors.length;
@@ -40,7 +38,6 @@ function draw() {
 }
 
 //STOP DRAWING ON CLICK
-
 function mousePressed() {
     noLoop();
 }
