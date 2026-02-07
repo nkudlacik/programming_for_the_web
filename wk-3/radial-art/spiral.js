@@ -11,7 +11,7 @@ function makeArm(rotateBy) {
     noFill();
     stroke('#ccff00');
     strokeWeight(1);
-    ellipse(150, 150 + alt, 150 - alt);
+    ellipse(10, 200 + alt, 450 - alt);
 }
 
 function draw() {
