@@ -1,36 +1,42 @@
 //SPECIFICATIONS
-const circleDiameter = 100;
-//let circleX = 200;
-//let circleY = 300;
-let startingX = 200;
+const rectWidth = 110;
+const rectHeight = 150;
+
+let startingX = 250;
 let startingY = 100;
-let myCircles = [];
+let myCards = [];
 let startingId = 0;
 
 //CANVAS
 function setup () {
     createCanvas(1000, 500);
-    background(0);
-    //ellipse(circleX, circleY, circleDiameter);
+    background('#498a41');
+
     for(let k = 0; k < 2; k++) {
         for (let i = 0; i < 4; i++) {
-            ellipse(startingX, startingY, circleDiameter);
-            myCircles.push({ x: startingX, y: startingY, id: startingId })
-            startingX += 150;
+            rect(startingX, startingY, rectWidth, rectHeight);
+
+            myCards.push({ x: startingX, y: startingY, id: startingId });
+
+            startingX += rectWidth + 20;
             startingId++;
         }
-        startingY += 150;
-        startingX = 200;
+        startingY += rectHeight + 20;
+        startingX = 250;
     }
-    console.log(myCircles);
+    console.log(myCards);
 }
 
 //MOUSE PRESSED FUNCTION
 function mousePressed() {
-    for(let j = 0; j < myCircles.length; j++) {
-        let distance = dist(mouseX, mouseY, myCircles[j].x, myCircles[j].y);
-        if (distance < circleDiameter / 2) {
-            console.log('circle has been hit!', myCircles[j].id);
+    for(let j = 0; j < myCards.length; j++) {
+        if (
+            mouseX > myCards[j].x &&
+            mouseX < myCards[j].x + rectWidth &&
+            mouseY > myCards[j].y &&
+            mouseY < myCards[j].y + rectHeight
+        ) {
+            console.log('card has been clicked!', myCards[j].id);
         }
     }
 }
