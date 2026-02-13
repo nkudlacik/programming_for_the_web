@@ -2,7 +2,7 @@
 const rectWidth = 110;
 const rectHeight = 150;
 
-let startingX = 250;
+let startingX = 200;
 let startingY = 100;
 let myCards = [];
 let startingId = 0;
@@ -13,7 +13,7 @@ function setup () {
     background('#498a41');
 
     for(let k = 0; k < 2; k++) {
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 5; i++) {
             rect(startingX, startingY, rectWidth, rectHeight);
 
             myCards.push({ x: startingX, y: startingY, id: startingId });
@@ -22,7 +22,7 @@ function setup () {
             startingId++;
         }
         startingY += rectHeight + 20;
-        startingX = 250;
+        startingX = 200;
     }
     console.log(myCards);
 }
