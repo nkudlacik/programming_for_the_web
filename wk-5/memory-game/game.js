@@ -53,6 +53,7 @@ function setup() {
 }
 
 //DRAW FUNCTION
+//unable to put background color here; overrides card images
 function draw () {
     if (gameState.numMatched === gameState.totalPairs) {
         fill('yellow');
@@ -60,6 +61,21 @@ function draw () {
         text('You Win!', 400, 425);
         noLoop();
     }
+    //used variable n instead of k; k already used in mousepressed
+    for (let n = 0; n < cards.length; n++) {
+        if(!cards[n].isMatch) {
+            cards[n].face = DOWN;
+        }
+        cards[n].show();
+    }
+    //SCOREBOARD
+    noLoop();
+    gameState.flippedCards.length = 0;
+    gameState.waiting = false;
+    fill(255);
+    textSize(36);
+    text('Attempts: ' + gameState.attempts, 100, 500);
+    text('Matches: ' + gameState.numMatched, 100, 450);
 }
 
 //MOUSE PRESSED FUNCTION
@@ -76,7 +92,8 @@ function mousePressed () {
         }
     }
     if (gameState.flippedCards.length === 2) {
-        if (gameState.flippedCards[0].faceImg === gameState.flippedCards[1].faceImg) {
+        gameState.attempts++;
+        if (gameState.flippedCards[0].cardfaceImg === gameState.flippedCards[1].cardfaceImg) {
             //CARDS MATCH! TIME TO SCORE
             //MARK CARDS AS MATCH SO THEY DON'T FLIP BACK
             gameState.flippedCards[0].isMatch = true;
