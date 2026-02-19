@@ -53,10 +53,11 @@ function setup() {
 }
 
 //MOUSE PRESSED FUNCTION
-function mousePressed() {
+function mousePressed () {
     for (let k = 0; k < cards.length; k++) {
-        if(cards[k].didHit(mouseX, mouseY)) {
+        if (gameState.flippedCards.length < 2 && cards[k].didHit(mouseX, mouseY)) {
             console.log('flipped', cards[k]);
+            gameState.flippedCards.push(cards[k]);
         }
     }
 }
