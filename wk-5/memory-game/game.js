@@ -70,19 +70,20 @@ class Card {
         this.height = 100;
         this.face = DOWN;
         this.cardfaceImg = cardfaceImg;
+        this.isMatch = false;
         this.show();
     }
 
 //CARD FUNCTIONS & METHODS
     show() {
-        if (this.face === DOWN) {
-            fill('#ffffff');
-            rect(this.x, this.y, this.width, this.height, 10);
-            image(cardback, this.x, this.y);
-        } else {
+        if (this.face === UP || this.isMatch) {
             fill('#f5cf0f');
             rect(this.x, this.y, this.width, this.height, 10);
             image(this.cardfaceImg, this.x, this.y);
+        } else {
+            fill('#ffffff');
+            rect(this.x, this.y, this.width, this.height, 10);
+            image(cardback, this.x, this.y);
         }
     }
 
