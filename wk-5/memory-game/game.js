@@ -52,6 +52,16 @@ function setup() {
     }
 }
 
+//DRAW FUNCTION
+function draw () {
+    if (gameState.numMatched === gameState.totalPairs) {
+        fill('yellow');
+        textSize(66);
+        text('You Win!', 400, 425);
+        noLoop();
+    }
+}
+
 //MOUSE PRESSED FUNCTION
 function mousePressed () {
     if (gameState.waiting) {
