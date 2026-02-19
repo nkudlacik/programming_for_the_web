@@ -1,25 +1,41 @@
 //GLOBAL VARIABLES
-let myCard;
 const DOWN = 'down';
 const UP = 'up';
+let startingX = 100;
+let startingY = 100;
+let cards = [];
+const gameState = {
+
+}
 
 //CANVAS SETUP
 function setup() {
-    createCanvas(1000, 500);
+    createCanvas(800, 600);
     background('#498a41');
-    myCard = new Card();
+    for (let j = 0; j < 2; j++) {
+        for (let i = 0; i < 5; i++) {
+        cards.push(new Card(startingX, startingY));
+        startingX += 120;
+        }
+        startingY += 150;
+        startingX = 100;
+    }
 }
 
 //MOUSE PRESSED FUNCTION
 function mousePressed() {
-    console.log(myCard.didHit(mouseX, mouseY));
+    for (let k = 0; k < cards.length; k++) {
+        if(cards[k].didHit(mouseX, mouseY)) {
+            console.log('flipped');
+        }
+    }
 }
 
 //CARD CLASS
 class Card {
-    constructor() {
-        this.x = 100;
-        this.y = 100;
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
         this.width = 80;
         this.height = 100;
         this.face = DOWN;
