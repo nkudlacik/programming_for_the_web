@@ -105,7 +105,7 @@ function mousePressed () {
             loop();
         } else {
             gameState.waiting = true;
-            const loopTimeout = windpw.setTimeout(() => {
+            const loopTimeout = window.setTimeout(() => {
                 loop();
                 window.clearTimeout(loopTimeout);
             }, 1000)
