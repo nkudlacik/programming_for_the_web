@@ -54,10 +54,34 @@ function setup() {
 
 //MOUSE PRESSED FUNCTION
 function mousePressed () {
+    if (gameState.waiting) {
+        return;
+    }
     for (let k = 0; k < cards.length; k++) {
+        //FIRST CHECK FLIPPED CARDS LENGTH
+        //THEN TRIGGER THE FLIP
         if (gameState.flippedCards.length < 2 && cards[k].didHit(mouseX, mouseY)) {
             console.log('flipped', cards[k]);
             gameState.flippedCards.push(cards[k]);
+        }
+    }
+    if (gameState.flippedCards.length === 2) {
+        if (gameState.flippedCards[0].faceImg === gameState.flippedCards[1].faceImg) {
+            //CARDS MATCH! TIME TO SCORE
+            //MARK CARDS AS MATCH SO THEY DON'T FLIP BACK
+            gameState.flippedCards[0].isMatch = true;
+            gameState.flippedCards[1].isMatch = true;
+            //EMPTY THE FLIPPED CARDS ARRAY
+            gameState.flippedCards.length = 0;
+            //INCREMENT THE SCORE
+            gameState.numMatched++;
+            loop();
+        } else {
+            gameState.waiting = true;
+            const loopTimeout = windpw.setTimeout(() => {
+                loop();
+                window.clearTimeout(loopTimeout);
+            }, 1000)
         }
     }
 }
