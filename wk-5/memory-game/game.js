@@ -5,7 +5,11 @@ let startingX = 100;
 let startingY = 100;
 let cards = [];
 const gameState = {
-
+    totalPairs: 5,
+    flippedCards: [],
+    numMatched: 0,
+    attempts: 0,
+    waiting: false
 }
 
 //CARD IMAGES
