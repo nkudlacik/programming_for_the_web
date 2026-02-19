@@ -55,6 +55,7 @@ function setup() {
 //DRAW FUNCTION
 //unable to put background color here; overrides card images
 function draw () {
+    background('#498a41')
     if (gameState.numMatched === gameState.totalPairs) {
         fill('yellow');
         textSize(66);
