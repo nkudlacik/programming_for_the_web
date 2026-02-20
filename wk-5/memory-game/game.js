@@ -2,7 +2,7 @@
 const DOWN = 'down';
 const UP = 'up';
 let startingX = 100;
-let startingY = 100;
+let startingY = 150;
 let cards = [];
 const gameState = {
     totalPairs: 5,
@@ -11,10 +11,13 @@ const gameState = {
     attempts: 0,
     waiting: false
 }
+let song;
+let button;
 
 //CARD IMAGES
 let cardfaceArray = [];
 let cardback;
+
 function preload() {
     cardback = loadImage('images/card-back.png');
     cardfaceArray = [
@@ -23,12 +26,18 @@ function preload() {
         loadImage('images/dennis.png'),
         loadImage('images/frank.png'),
         loadImage('images/mac.png')
-    ]
+    ];
+
+//LOAD MUSIC
+    song = loadSound('music/theme-music.mp3');
 }
 
 //SETUP
 function setup() {
-    createCanvas(800, 600);
+    let canvas = createCanvas(800, 600);
+    canvas.style('border-radius', '20px');
+    canvas.style('overflow', 'hidden'); 
+
     let selectedFaces = [];
     for (let z = 0; z < 5; z++) {
         const randomIdx = floor(random(cardfaceArray.length));
@@ -49,15 +58,27 @@ function setup() {
         startingY += 150;
         startingX = 100;
     }
+//MUSIC BUTTON
+    button = createButton('Play Theme');
+    button.position(355, 560);
+    button.mousePressed(toggleMusic);
 }
 
 //VICTORY MESSAGE
 function draw () {
-    background('#498a41')
+    background('#3f8b35')
     if (gameState.numMatched === gameState.totalPairs) {
+//MAIN MESSAGE
         fill('yellow');
-        textSize(30);
-        text('You Are The Golden God!', 400, 425);
+        textFont('Lucida Console');
+        textStyle(ITALIC);
+        textSize(60);
+        text('You Are The Golden God!', 70, 480);
+//SUBTITLE MESSAGE
+        fill('#0e3e08');
+        textStyle(ITALIC);
+        textSize(25);
+        text('~ No Charlie Work for You ~', 230, 513);
         noLoop();
     }
 
@@ -67,14 +88,19 @@ function draw () {
         }
         cards[n].show();
     }
-//SCOREBOARD
+
+//TITLE & SCOREBOARD
     noLoop();
     gameState.flippedCards.length = 0;
     gameState.waiting = false;
-    fill(255);
-    textSize(36);
-    text('Attempts: ' + gameState.attempts, 100, 500);
-    text('Matches: ' + gameState.numMatched, 100, 450);
+    fill('white');
+    textFont('Lucida Console');
+    textStyle(ITALIC);
+    textSize(60);
+    text('The Gang Learns Javascript', 60, 90);
+    textSize(35);
+    text('Wildcard Matches: ' + gameState.numMatched, 480, 575);
+    text('Jabroni Attempts: ' + gameState.attempts, 25, 575);
 }
 
 //MOUSE PRESSED FUNCTION
@@ -82,7 +108,7 @@ function mousePressed () {
     if (gameState.waiting) {
         return;
     }
-//2 CARDS FLIPPED CEILING
+
     for (let k = 0; k < cards.length; k++) {
         if (gameState.flippedCards.length < 2 && cards[k].didHit(mouseX, mouseY)) {
             gameState.flippedCards.push(cards[k]);
@@ -92,12 +118,12 @@ function mousePressed () {
     if (gameState.flippedCards.length === 2) {
         gameState.attempts++;
         if (gameState.flippedCards[0].cardfaceImg === gameState.flippedCards[1].cardfaceImg) {
-//MARKING MATCHED PAIRS, RETAINING FLIPPED STATE
+
             gameState.flippedCards[0].isMatch = true;
             gameState.flippedCards[1].isMatch = true;
-//EMPTYING FLIPPED CARDS ARRAY
+
             gameState.flippedCards.length = 0;
-//INCREMENTING USER SCORE
+
             gameState.numMatched++;
             loop();
         } else {
@@ -123,7 +149,6 @@ class Card {
         this.show();
     }
 
-//CARD FUNCTIONS & METHODS
     show() {
         if (this.face === UP || this.isMatch) {
             fill('#ffffff');
@@ -169,4 +194,15 @@ function shuffleArray (array) {
         array[idx] = temp;
     }
     return array;
+}
+
+//TOGGLE MUSIC FUNCTION
+function toggleMusic() {
+    if (song.isPlaying()) {
+        song.pause();
+        button.html('Play Theme');
+    } else {
+        song.loop();
+        button.html('Pause Theme');
     }
+}
