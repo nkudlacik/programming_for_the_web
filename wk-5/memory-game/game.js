@@ -29,7 +29,6 @@ function preload() {
 //SETUP
 function setup() {
     createCanvas(800, 600);
-    background('#498a41');
     let selectedFaces = [];
     for (let z = 0; z < 5; z++) {
         const randomIdx = floor(random(cardfaceArray.length));
@@ -52,24 +51,23 @@ function setup() {
     }
 }
 
-//DRAW FUNCTION
-//unable to put background color here; overrides card images
+//VICTORY MESSAGE
 function draw () {
     background('#498a41')
     if (gameState.numMatched === gameState.totalPairs) {
         fill('yellow');
-        textSize(66);
-        text('You Win!', 400, 425);
+        textSize(30);
+        text('You Are The Golden God!', 400, 425);
         noLoop();
     }
-    //used variable n instead of k; k already used in mousepressed
+
     for (let n = 0; n < cards.length; n++) {
         if(!cards[n].isMatch) {
             cards[n].face = DOWN;
         }
         cards[n].show();
     }
-    //SCOREBOARD
+//SCOREBOARD
     noLoop();
     gameState.flippedCards.length = 0;
     gameState.waiting = false;
@@ -84,24 +82,22 @@ function mousePressed () {
     if (gameState.waiting) {
         return;
     }
+//2 CARDS FLIPPED CEILING
     for (let k = 0; k < cards.length; k++) {
-        //FIRST CHECK FLIPPED CARDS LENGTH
-        //THEN TRIGGER THE FLIP
         if (gameState.flippedCards.length < 2 && cards[k].didHit(mouseX, mouseY)) {
-            console.log('flipped', cards[k]);
             gameState.flippedCards.push(cards[k]);
         }
     }
+
     if (gameState.flippedCards.length === 2) {
         gameState.attempts++;
         if (gameState.flippedCards[0].cardfaceImg === gameState.flippedCards[1].cardfaceImg) {
-            //CARDS MATCH! TIME TO SCORE
-            //MARK CARDS AS MATCH SO THEY DON'T FLIP BACK
+//MARKING MATCHED PAIRS, RETAINING FLIPPED STATE
             gameState.flippedCards[0].isMatch = true;
             gameState.flippedCards[1].isMatch = true;
-            //EMPTY THE FLIPPED CARDS ARRAY
+//EMPTYING FLIPPED CARDS ARRAY
             gameState.flippedCards.length = 0;
-            //INCREMENT THE SCORE
+//INCREMENTING USER SCORE
             gameState.numMatched++;
             loop();
         } else {
@@ -130,11 +126,13 @@ class Card {
 //CARD FUNCTIONS & METHODS
     show() {
         if (this.face === UP || this.isMatch) {
-            fill('#f5cf0f');
+            fill('#ffffff');
+            noStroke();
             rect(this.x, this.y, this.width, this.height, 10);
             image(this.cardfaceImg, this.x, this.y);
         } else {
             fill('#ffffff');
+            noStroke();
             rect(this.x, this.y, this.width, this.height, 10);
             image(cardback, this.x, this.y);
         }
