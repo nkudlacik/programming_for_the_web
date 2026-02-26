@@ -1,34 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const llamaFacts = [
+    "Llamas have a maximum running speed of 40 miles per hour, making them more than twice as fast as the average human.",
+
+    "Llamas' blood has a high hemoglobin content, this availability of oxygen allows them to survive in high altitudes.",
+
+    "Llamas' eye positioning allows them to see 360 degrees around them, which helps them to spot predators from a distance.",
+
+    "Llamas' thick fur not only insulates them during cold months, but it also protects their flesh from animal bites.",
+
+    "Llamas are polygamous animals; males will mate with multiple females in their respective herd and are very territorial towards other males llamas.",
+
+    "Llamas are monogamous animals and this bullet point is a lie for ternary's sake."
+  ]
+
+  const monogamy = false;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <h1>Llama Facts</h1>
+
+      <ul>
+        <li>{llamaFacts[0]}</li>
+        <li>{llamaFacts[1]}</li>
+        <li>{llamaFacts[2]}</li>
+        <li>{llamaFacts[3]}</li>
+        <li>{monogamy ? llamaFacts[5] : llamaFacts[4]}</li>
+      </ul>
+
+    </div>
   )
 }
 
