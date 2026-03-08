@@ -1,0 +1,74 @@
+/* HEADERS */
+body {
+  font-family: "Quicksand", sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 60px;
+    color: #79acfe;
+    font-size: 45px;
+}
+
+p {
+    text-align: center;
+    font-size: larger;
+    font-size: 30px;
+}
+
+.key {
+    text-align: center;
+    font-size: 20px;
+    padding: 0 0 30px 0;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+
+/* TABLE */
+.design-table {
+    width: 84%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.design-table thead, .design-table tr {
+    border: 2px solid rgb(127, 127, 127);
+}
+
+.design-table th {
+    padding: 40px;
+    font-size: 20px;
+    width: auto;
+    color: #79acfe;
+}
+
+.design-table td, .design-table th {
+    border: 1px solid rgb(131, 131, 131);
+    text-align: center;
+}
+
+.design-table img {
+    height: 200px;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.design-table tbody {
+    background-color: rgb(255, 246, 219);
+}
+
+.design-table .overview {
+    width: 30%;
+}
+
+.design-table td:first-child {
+  font-weight: bold;
+}
