@@ -19,7 +19,7 @@ function App() {
       colors: ["Cyan", "Indigo", "Fuschia"],
       description: "The genius of Memphis Lite lies in the softening of Milano's harsh lines and palettes, allowing for consumers to explore options that were more subtle, or 'wearable', so to speak. Airbrushed, chalky details are frequently incorporated to break up the constructivist, severe sensibilities of Milano, and this will continue to be popular for years to come.",
       forKids: false,
-      image: "/.memphis-lite.png"
+      image: "./memphis-lite.png"
     },
     {
       movement: "Utopian Scholastic",

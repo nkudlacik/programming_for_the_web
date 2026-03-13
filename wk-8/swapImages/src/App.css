@@ -1,0 +1,43 @@
+h1 {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  text-transform: uppercase;
+  margin-top: 50px;
+  font-size: 50px;
+  color: #333
+}
+
+.image-frame {
+  width: 600px;
+  height: 70vh;
+  margin: 50px auto;
+  overflow: hidden;
+}
+
+.current-image {
+  width: 600px;
+  height: 70vh;
+  object-fit: cover;
+  border-radius: 10%;
+}
+
+button {
+  padding: 20px 20px;
+  margin: 5px;
+  font-size: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
