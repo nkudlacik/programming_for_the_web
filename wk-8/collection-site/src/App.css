@@ -1,0 +1,17 @@
+/* WHOLE PAGE */
+.collection {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  background-color: #c7c9e7;
+}
