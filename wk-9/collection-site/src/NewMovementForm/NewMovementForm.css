@@ -1,0 +1,16 @@
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label, .form-group textarea {
+    display: block;
+}
+
+.form-wrapper {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    padding: 10px;
+}

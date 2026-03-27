@@ -1,0 +1,113 @@
+import { useState } from 'react';
+import './App.css';
+import Masthead from './Masthead/Masthead';
+import ItemCard from './ItemCard/ItemCard';
+import { nanoid } from "nanoid";
+import { NewMovementForm } from './NewMovementForm/NewMovementForm';
+
+function App() {
+  const [designDecks, setDesignDecks] = useState([
+    {
+      movement: "Memphis Milano",
+      span: "1981-1987",
+      colors: ["red", "yellow", "blue"],
+      description: "Memphis Milano was an Italian design group , debuting in 1981 and disbanding in ‘87. The group sought to challenge the unquestioned popularization of earth tones and mainly functional design throughout the '60s and '70s, as well as disturb the harsh divide between 'high class' and 'kitschy' interior design. Motifs included abstract, geometrical forms, as well as a largely primary color scheme.",
+      forKids: false,
+      image: "./memphis-milano.png",
+      id: "1"
+    },
+    {
+      movement: "Memphis Lite",
+      span: "1984-1996",
+      colors: ["cyan", "indigo", "fuschia"],
+      description: "The genius of Memphis Lite lies in the softening of Milano's harsh lines and palettes, allowing for consumers to explore options that were more subtle, or 'wearable', so to speak. Airbrushed, chalky details are frequently incorporated to break up the constructivist, severe sensibilities of Milano, and this will continue to be popular for years to come.",
+      forKids: false,
+      image: "./memphis-lite.png",
+      id: "2"
+    },
+    {
+      movement: "Utopian Scholastic",
+      span: "1987-2003",
+      colors: ["green", "sky-blue", "red-orange"],
+      description: "Utopian Scholastic was used mainly to market 'edutainment' software to children, parents, and schools. Common iconography from this genre includes: realistic collage elements, new-age tech, nature settings, the subtle incorporation of school supplies and scientific equipment. This style both embraces and subverts its predecessor, Memphis Lite; playful sensibilities are certainly carried over from the genre, but a muting of the palette and an emphasis on intellectualism feel distinctly separate.",
+      forKids: true,
+      image: "./utopian-scholastic.png",
+      id: "3"
+    },
+    {
+      movement: "Factory Pomo",
+      span: "1988-1996",
+      colors: ["indigo", "gold", "mauve"],
+      description: "Factory Postmodernism utilizes similar geometrical elements, severe angles, and deeper, secondary colors as Memphis Lite, and also emphasizes scientific curiosity, much like Utopian Scholastic. Uniquely, Factory Pomo, placed much more stock in industrial, pseudo-architectural themes. One will often find gears, sketch lines, and grid paper featured in this style. Because of this, there is a strong emphasis on symmetry and mathematically-perfect shapes, contrasted by the unpredictable nature of asymmetrical details peppered into compositions.",
+      forKids: true,
+      image: "./factory-pomo.png",
+      id: "4"
+    },
+    {
+      movement: "Wacky Pomo",
+      span: "1992-2007",
+      colors: ["lime-green", "yellow", "red"],
+      description: "Wacky Postmodernism expands upon the science craze of Utopian Scholastic and Factory Pomo, but brings 2D into a 3D space. This style is characterized by a liberal use of hyper-saturated pigments, surrealist shapes, and stories of 'mad' scientists, specifically. The throughline of Memphis Milano's absurdity and contrarian approach to design is especially clear here.",
+      forKids: true,
+      image: "./wacky-pomo.png",
+      id: "5"
+    },
+    {
+      movement: "Y2k Futurism",
+      span: "1996-2007",
+      colors: ["cyan", "chrome", "navy"],
+      description: "Utilizing the momentum of Utopian Scholastic’s proposal to reside in a technologically enmeshed world, Y2K Futurism promoted a life eased by contemporary electronic products. Y2K not only furthers caters to the appetite for children’s marketing to include S.T.E.M. imagery and themes, but it also carries the Milano/Wacky Pomo torch towards an experimental age of Computer Generated Graphics in the culture. Y2K’s tell-tale design motifs are: a heavy-use of cool tones, an occasional neon accent, realistic chrome textures, and an enthusiastic exploration of 3D graphics.",
+      forKids: true,
+      image: "./y2k-futurism.png",
+      id: "6"
+    }
+  ]);
+
+  function addDesignDeck(data) {
+    const newDeck = {
+      movement: data.movement,
+      image: data.image,
+      colors: data.colors || [],
+      forKids: !!data.forKids,
+      span: "",
+      description: "",
+      id: nanoid(6)
+    };
+
+    setDesignDecks([...designDecks, newDeck]);
+  }
+
+  function deleteCard(id) {
+    const updated = designDecks.filter(deck => deck.id !== id);
+    setDesignDecks(updated);
+  }
+
+  function duplicateCard(id) {
+    const match = designDecks.find(deck => deck.id === id);
+    if (!match) return;
+
+    const copy = { ...match, id: nanoid() };
+    setDesignDecks([...designDecks, copy]);
+  }
+
+  return (
+    <div className="page">
+      <Masthead />
+
+      <div className="collection">
+        {designDecks.map((deck) => (
+          <ItemCard
+            key={deck.id}
+            deleteFn={deleteCard}
+            duplicateFn={duplicateCard}
+            {...deck}
+          />
+        ))}
+      </div>
+
+      <NewMovementForm addDesignDeck={addDesignDeck} />
+    </div>
+  );
+}
+
+export default App;
