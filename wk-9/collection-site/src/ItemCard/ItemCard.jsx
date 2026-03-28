@@ -7,7 +7,7 @@ import copy from "../assets/icons/copy.svg";
 
 export default function ItemCard({
       movement,
-      span,
+      span, // ← ensure this prop is included
       colors,
       description,
       forKids,
@@ -41,13 +41,17 @@ export default function ItemCard({
                 </a>
             </div>
 
-            <div className="cardTitle">{movement}</div>
+            <div className="cardTitle">
+                {movement} {span && <span className="cardSpan">({span})</span>}
+            </div>
+
             {colors.map((color) => {
                 return <div key={color} className={clsx(["stripe", color])} />
             })}
         </div>
     )
 }
+
 ItemCard.propTypes = {
       movement: PropTypes.string,
       span: PropTypes.string,

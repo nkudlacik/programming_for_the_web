@@ -1,3 +1,4 @@
+{/* IMPORTS */}
 import { useState } from 'react';
 import './App.css';
 import Masthead from './Masthead/Masthead';
@@ -5,6 +6,7 @@ import ItemCard from './ItemCard/ItemCard';
 import { nanoid } from "nanoid";
 import { NewMovementForm } from './NewMovementForm/NewMovementForm';
 
+{/* MOVEMENT DATA */}
 function App() {
   const [designDecks, setDesignDecks] = useState([
     {
@@ -63,13 +65,14 @@ function App() {
     }
   ]);
 
+{/* IMPORTS */}
   function addDesignDeck(data) {
     const newDeck = {
       movement: data.movement,
       image: data.image,
       colors: data.colors || [],
       forKids: !!data.forKids,
-      span: "",
+      span: data.span || "",
       description: "",
       id: nanoid(6)
     };
