@@ -1,0 +1,76 @@
+/* .FORM-GROUP - FORM LAYOUT */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label, .form-group textarea {
+    display: block;
+}
+
+/* .FORM-WRAPPER */
+.form-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 15px auto;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgb(233, 228, 238);
+}
+
+/* UNIVERSAL STYLING */
+/* .FORM-WRAPPER H4, LABEL, BUTTON, TEXTAREA, PLACEHOLDER, INPUT */
+.form-wrapper h4, .form-wrapper label, .form-wrapper button, .form-wrapper textarea, input::placeholder, input {
+    font-family: sans-serif;
+    color: rgb(32, 24, 36);
+    text-transform: lowercase;
+    font-weight: lighter;
+    font-size: 17px;
+    padding: 6px;
+}
+
+/* CIRCUMSTANTIAL STYLING */
+.form-wrapper h4 {
+    text-align: center;
+    color: rgb(120, 14, 149);
+    font-size: 25px;
+    margin: 10px auto;
+}
+
+input::placeholder {
+    color: rgb(136, 129, 142);
+}
+
+/* .COLORS-INPUT */
+.colors-input {
+    margin: 15px auto;
+}
+
+/* .MADE-FOR-KIDS */
+.made-for-kids {
+    margin-top: 15px;
+}
+
+/* SUBMIT BUTTON & ERROR MESSAGES */
+.error, .warning, .form-wrapper button {
+  color: rgb(120, 14, 149);
+  font-size: 17px;
+  margin-top: 4px;
+}
+
+.form-wrapper button {
+    border: 1px solid rgb(32, 24, 36);
+    border-radius: 10px;
+    margin: 15px auto 0;
+    background-color: rgb(120, 14, 149);
+    color: white;
+    padding: 15px;
+}
+
+.form-wrapper button:hover {
+  background-color: #c7c9e7;
+  color: rgb(120, 14, 149);
+  font-weight: 500;
+}

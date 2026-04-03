@@ -1,0 +1,43 @@
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  margin-top: 40px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.nav-link:hover {
+  color: #bb00d4;
+}
+
+.active {
+  color: #ff63f4;
+  font-weight: bold;
+  border-bottom: 2px solid #ff63f4;
+}
+
+img {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+h1 {
+  margin-top: 40px;
+}
+
+p {
+  text-align: left;
+  padding: 0 40px;
+  margin-bottom: 40px;
+}

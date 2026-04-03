@@ -1,0 +1,84 @@
+/* WHOLE PAGE */
+.collection {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  background-color: #c7c9e7;
+}
+
+/* TEXT */
+.deckDetailPage {
+    font-family: sans-serif;
+    color: rgb(32, 24, 36);
+    text-transform: lowercase;
+    margin: 40px 35%;
+}
+
+.deckDetailPage h1, .deckDetailPage .movementSpan{
+   font-weight: lighter;
+   font-size: 25px;
+}
+
+.deckDetailPage p:last-of-type {
+    margin-bottom: 40px;
+}
+
+.deckDetailPage p span {
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* HEADER */
+.movementHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;  
+}
+
+/* HYPERLINKS */
+a {
+  color: rgb(32, 24, 36);
+  text-decoration: none;
+  font-family: sans-serif;
+  text-transform: lowercase;
+  font-weight: lighter;
+  font-size: 15px;
+}
+
+a:hover {
+    color: #8405c9;
+    font-weight: lighter;
+}
+
+/* DECK DETAIL IMAGES */
+.deckDetailPage img {
+    width: 100%;
+    margin: 40px auto;
+    display: block;
+    border-radius: 20px;
+}
+
+/* DECK DETAIL COLORBLOCKS */
+.deckDetailPage .colorBlock {
+    font-size: 25px;
+    font-weight: lighter;  
+    text-align: center;  
+    padding: 0.5em 1em;
+    margin: 0.25em auto;
+    border-radius: 999px;
+    color: #fff;
+}
+
+.deckDetailPage .colorBlock.yellow {
+    color: #000;
+}
