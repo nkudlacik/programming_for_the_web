@@ -1,72 +1,171 @@
-// GLOBAL VARIABLES //
+// CANVAS & VIDEO VARIABLES //
 let vid;
 let size;
 let asciiChar = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,^`'. ";
 let canvas;
 
-// SETUP FUNCTION //
+// AUDIO & INTERACTION VARIABLES //
+let songs = [];
+let currentSong;
+let nextSong;
+let radio;
+
+// FADE CONTROL VARIABLES //
+let fadeDuration = 600;
+let fading = false;
+let fadeStartTime;
+
+// SONG COLOR SYSTEM //
+let songColors = [
+    "#ff0095",
+    "#1544ff",
+    "#00ff48"
+];
+
+let currentColor;
+let targetColor;
+
+// SETUP //
 function setup() {
     let canvas = createCanvas(640, 480);
     canvas.parent("canvas-container");
 
-    // LOAD VIDEO & HIDE DEFAULT HTML VIDEO ELEMENT //
     vid = createVideo("media/dancer-transparent.mp4", videoLoaded);
     vid.hide();
     size = 1;
 
-    // ASCII TEXT STYLE SETTINGS //
-    textFont("monospace");     
-    textAlign(CENTER, CENTER); 
-    textSize(6);               
-    fill("#00ff62");           
+    // LOAD SONGS //
+    songs[0] = createAudio("media/dance-this-mess-around.mp3");
+    songs[1] = createAudio("media/cobra.mp3");
+    songs[2] = createAudio("media/ballet.mp3");
+
+    songs.forEach(song => {
+        song.volume(0);
+        song.hide();
+    });
+
+    currentSong = songs[0];
+    currentSong.volume(1);
+    currentSong.play();
+
+    // COLORS INITIALIZATION //
+    currentColor = color(songColors[0]);
+    targetColor = songColors[0];
+
+    // RADIO UI //
+    radio = createRadio();
+    radio.option('0', '1');
+    radio.option('1', '2');
+    radio.option('2', '3');
+    radio.selected('0');
+    radio.parent("canvas-container");
+    radio.changed(changeSong);
+
+    textFont("monospace");
+    textAlign(CENTER, CENTER);
+    textSize(6);
 }
 
-// VIDEO VOLUME & LOOP SETTINGS //
+// VIDEO //
 function videoLoaded() {
     vid.volume(0);
     vid.loop();
 }
 
-// VIDEO LOOP SAFEGUARD //
+// DRAW LOOP //
 function draw() {
     if (vid.elt.ended) {
         vid.time(0);
         vid.play();
     }
 
-    // ASCII RENDERING //
+    // GRADIENT COLOR TRANSITION //
+    currentColor = lerpColor(currentColor, color(targetColor), 0.3);
+
+    // AUDIO FADE //
+    if (fading) {
+        let elapsed = millis() - fadeStartTime;
+        let t = constrain(elapsed / fadeDuration, 0, 1);
+
+        currentSong.volume(1 - t);
+        nextSong.volume(t);
+
+        if (t >= 1) {
+            currentSong.pause();
+            currentSong = nextSong;
+            fading = false;
+        }
+    }
+
     background(0);
     drawAscii(vid, 0);
+
+    // BUTTON COLOR UPDATE //
+    updateButtonColors();
 }
 
-// FUNCTION TO LOAD PIXEL DATA FROM EACH FRAME //
+// SWITCH SONGS //
+function changeSong() {
+    if (fading) return;
+
+    let selected = radio.value();
+    nextSong = songs[selected];
+
+    targetColor = songColors[selected];
+
+    nextSong.volume(0);
+    nextSong.currentTime = 0;
+    nextSong.play();
+
+    fadeStartTime = millis();
+    fading = true;
+}
+
+// AUDIO ENABLE //
+function mousePressed() {
+    userStartAudio();
+}
+
+// BUTTON GRADIENT SYSTEM //
+function updateButtonColors() {
+    let labels = selectAll('label');
+
+    for (let i = 0; i < labels.length; i++) {
+
+        let base = color(targetColor);
+        let black = color(0);
+        let intensity = (i == radio.value()) ? 0.95 : 0.35;
+        let bg = lerpColor(black, base, intensity);
+        let txt = (i == radio.value()) ? color(0) : base;
+
+        labels[i].style('background', bg);
+        labels[i].style('color', txt);
+        labels[i].style('border-color', targetColor);
+    }
+}
+
+// ASCII RENDER //
 function drawAscii(img, yOffset) {
     img.loadPixels();
 
-    // SKIP EVERY OTHER PIXEL FOR PERFORMANCE //
     for (let i = 0; i < img.width; i += 2) {
         for (let j = 0; j < img.height; j += 2) {
 
-            // CALCULATE INDEX IN PIXEL ARRAY //
             let index = (i + j * img.width) * 4;
 
-            // EXTRACT RGB COLOR VALUES //
             let r = img.pixels[index + 0];
             let g = img.pixels[index + 1];
             let b = img.pixels[index + 2];
 
-            // BRIGHTNESS = AVERAGE OF RGB VALUES //
             let bright = (r + g + b) / 3;
 
-            // MAP BRIGHTNESS TO ASCII CHARACTER INDEX //
             let charIndex = floor(map(bright, 0, 255, 0, asciiChar.length - 1));
             let char = asciiChar.charAt(charIndex);
 
-            // CALCULATE POSITION TO DRAW CHARACTER //  
             let x = i * size + size / 2;
             let y = j * size + size / 2 + yOffset;
 
-            // DRAW ASCII CHARACTER AT CALCULATED POSITION //
+            fill(currentColor);
             text(char, x, y);
         }
     }
