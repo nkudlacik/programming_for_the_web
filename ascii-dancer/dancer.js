@@ -25,6 +25,14 @@ let songColors = [
 let currentColor;
 let targetColor;
 
+// START GATE //
+let started = false;
+
+// ATTACH START HANDLER //
+window.onload = function () {
+    document.getElementById('start-btn').addEventListener('click', startExperience);
+};
+
 // SETUP //
 function setup() {
     let canvas = createCanvas(640, 480);
@@ -46,13 +54,12 @@ function setup() {
 
     currentSong = songs[0];
     currentSong.volume(1);
-    currentSong.play();
 
     // COLORS INITIALIZATION //
     currentColor = color(songColors[0]);
     targetColor = songColors[0];
 
-    // RADIO UI //
+    // RADIO BUTTON UI //
     radio = createRadio();
     radio.option('0', '1');
     radio.option('1', '2');
@@ -66,6 +73,20 @@ function setup() {
     textSize(6);
 }
 
+// START FUNCTION //
+function startExperience() {
+    if (started) return;
+
+        userStartAudio();
+        currentSong.play();
+        vid.loop();
+
+    // SAFE DOM REMOVAL //
+    let screen = document.getElementById('start-screen');
+    if (screen) screen.remove();
+    started = true;
+}
+
 // VIDEO //
 function videoLoaded() {
     vid.volume(0);
@@ -74,12 +95,14 @@ function videoLoaded() {
 
 // DRAW LOOP //
 function draw() {
+    if (!started) return;
+
     if (vid.elt.ended) {
         vid.time(0);
         vid.play();
     }
 
-    // GRADIENT COLOR TRANSITION //
+    // COLOR TRANSITION //
     currentColor = lerpColor(currentColor, color(targetColor), 0.3);
 
     // AUDIO FADE //
@@ -100,7 +123,6 @@ function draw() {
     background(0);
     drawAscii(vid, 0);
 
-    // BUTTON COLOR UPDATE //
     updateButtonColors();
 }
 
@@ -131,7 +153,6 @@ function updateButtonColors() {
     let labels = selectAll('label');
 
     for (let i = 0; i < labels.length; i++) {
-
         let base = color(targetColor);
         let black = color(0);
         let intensity = (i == radio.value()) ? 0.95 : 0.35;
@@ -170,3 +191,33 @@ function drawAscii(img, yOffset) {
         }
     }
 }
+
+// FORCE SAFE START HANDLER //
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('start-btn');
+
+    btn.addEventListener('click', () => {
+
+        // START AUDIO SAFELY ON USER INTERACTION //
+        if (typeof userStartAudio === 'function') {
+            userStartAudio();
+        }
+
+        // START VIDEO //
+        if (vid) {
+            vid.loop();
+        }
+
+        // START SONG //
+        if (currentSong) {
+            currentSong.play();
+        }
+
+        // REMOVE OVERLAY //
+        const screen = document.getElementById('start-screen');
+        if (screen) screen.remove();
+
+        // UNLOCK DRAW LOOP //
+        started = true;
+    });
+});

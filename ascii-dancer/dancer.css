@@ -1,3 +1,29 @@
+/* START SCREEN */
+#start-screen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.start-box {
+    text-align: center;
+    color: #00ff62;
+    font-family: monospace;
+}
+
+#start-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: transparent;
+    border: 2px solid #00ff62;
+    color: #00ff62;
+    cursor: pointer;
+}
+
 /* P5.JS CANVAS */
 #canvas-container {
     display: flex;
