@@ -28,11 +28,6 @@ let targetColor;
 // START GATE //
 let started = false;
 
-// ATTACH START HANDLER //
-window.onload = function () {
-    document.getElementById('start-btn').addEventListener('click', startExperience);
-};
-
 // SETUP //
 function setup() {
     let canvas = createCanvas(640, 480);
@@ -43,9 +38,9 @@ function setup() {
     size = 1;
 
     // LOAD SONGS //
-    songs[0] = createAudio("media/dance-this-mess-around.mp3");
-    songs[1] = createAudio("media/cobra.mp3");
-    songs[2] = createAudio("media/ballet.mp3");
+    songs[0] = createAudio("media/1-dance-this-mess-around.mp3");
+    songs[1] = createAudio("media/2-cobra.mp3");
+    songs[2] = createAudio("media/3-ballet.mp3");
 
     songs.forEach(song => {
         song.volume(0);
@@ -71,20 +66,6 @@ function setup() {
     textFont("monospace");
     textAlign(CENTER, CENTER);
     textSize(6);
-}
-
-// START FUNCTION //
-function startExperience() {
-    if (started) return;
-
-        userStartAudio();
-        currentSong.play();
-        vid.loop();
-
-    // SAFE DOM REMOVAL //
-    let screen = document.getElementById('start-screen');
-    if (screen) screen.remove();
-    started = true;
 }
 
 // VIDEO //
@@ -137,7 +118,7 @@ function changeSong() {
 
     nextSong.volume(0);
     nextSong.currentTime = 0;
-    nextSong.play();
+    nextSong.loop();
 
     fadeStartTime = millis();
     fading = true;
@@ -148,12 +129,28 @@ function mousePressed() {
     userStartAudio();
 }
 
+// KEYBOARD INPUT FUNCTIONALITY //
+function keyPressed() {
+    if (!started || fading) return;
+
+    if (key === '1') {
+        radio.selected('0');
+        changeSong();
+    } else if (key === '2') {
+        radio.selected('1');
+        changeSong();
+    } else if (key === '3') {
+        radio.selected('2');
+        changeSong();
+    }
+}
+
 // BUTTON GRADIENT SYSTEM //
 function updateButtonColors() {
     let labels = selectAll('label');
 
     for (let i = 0; i < labels.length; i++) {
-        let base = color(targetColor);
+        let base = currentColor;
         let black = color(0);
         let intensity = (i == radio.value()) ? 0.95 : 0.35;
         let bg = lerpColor(black, base, intensity);
@@ -210,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // START SONG //
         if (currentSong) {
-            currentSong.play();
+            currentSong.loop();
         }
 
         // REMOVE OVERLAY //

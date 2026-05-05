@@ -13,11 +13,14 @@
     text-align: center;
     color: #00ff62;
     font-family: monospace;
+    font-size: clamp(10px, 3vw, 30px);
+    text-transform: lowercase;
 }
 
 #start-btn {
     margin-top: 20px;
-    padding: 10px 20px;
+    font-size: clamp(10px, 3vw, 30px);
+    padding: clamp(6px, 1vw, 12px) clamp(12px, 2vw, 24px);
     background: transparent;
     border: 2px solid #00ff62;
     color: #00ff62;
