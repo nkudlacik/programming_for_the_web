@@ -41,10 +41,7 @@
 html, body {
     height: 100%;
     margin: 0;
-}
-
-body {
-    background-color: #000000;
+    background: #000;
 }
 
 /* RADIO BUTTONS */
@@ -62,7 +59,6 @@ label {
     background: #000;
     border: 4px solid #00ff62;
     border-radius: 20%;
-    color: #00ff62;
     font-family: courier, monospace;
     font-size: 30px;
     font-weight: 600;
@@ -70,12 +66,7 @@ label {
     flex-shrink: 0;
 }
 
-.selected {
-    background: #00ff62;
-    color: #000;
-}
-
-/* PREVENT WRAPPING & CONTROL SPACING */
+/* RADIO CONTAINER */
 #canvas-container > div {
     display: flex;
     justify-content: center;

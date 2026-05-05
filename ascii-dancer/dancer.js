@@ -124,7 +124,7 @@ function changeSong() {
     fading = true;
 }
 
-// AUDIO ENABLE //
+// UNLOCK AUDIO CONTEXT (BROWSER INTERACTION REQUIREMENT) //
 function mousePressed() {
     userStartAudio();
 }
@@ -189,7 +189,7 @@ function drawAscii(img, yOffset) {
     }
 }
 
-// FORCE SAFE START HANDLER //
+// SECOND START SYSTEM (DOM-BASED FALLBACK) //
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('start-btn');
 
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
             vid.loop();
         }
 
-        // START SONG //
+        // DIRECT AUDIO START BYPASSING FADE SYSTEM //
         if (currentSong) {
             currentSong.loop();
         }
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const screen = document.getElementById('start-screen');
         if (screen) screen.remove();
 
-        // UNLOCK DRAW LOOP //
+        // ENABLE MAIN RENDER LOOP VIA STATE FLAG //
         started = true;
     });
 });
